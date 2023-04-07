@@ -43,8 +43,8 @@ public class Server {
                 return "{}";
             String body = request.body();
             MovePlayerRequest movePlayerRequest = new Gson().fromJson(body, MovePlayerRequest.class);
-            g.movePlayer(movePlayerRequest);
-            return "{\"status\":\"Ok\"}";
+            boolean success = g.movePlayer(movePlayerRequest);
+            return "{\"success\":" + success + "}";
         });
         post("/check_guess/:uuid", (request, response) -> {
             response.type("application/json");

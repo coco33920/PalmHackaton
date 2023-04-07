@@ -38,4 +38,9 @@ public class Room extends Tile {
     public String getRoomName() {
         return roomName;
     }
+
+    @Override
+    public String toString() {
+        return "Room [x=" + getX() + ";y=" + getY() + "]";
+    }
 }

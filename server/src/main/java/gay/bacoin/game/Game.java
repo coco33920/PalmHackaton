@@ -32,8 +32,7 @@ public class Game {
     }
 
     public static Game getGame(UUID uuid) {
-        Game g = allGameRunning.get(uuid);
-        return g;
+        return allGameRunning.get(uuid);
     }
 
     private void fillDefaultMap() {
@@ -75,7 +74,7 @@ public class Game {
         }
 
         //Line 8
-        for (int i = 1; i < 24; i++) {
+        for (int i = 0; i < 24; i++) {
             map[7][i] = new BasicTile(i, 7);
         }
 
@@ -197,10 +196,34 @@ public class Game {
         players.put(player5.getUuid(), player5);
     }
 
-    public void movePlayer(MovePlayerRequest request) {
+    public boolean movePlayer(MovePlayerRequest request) {
         Player player = players.get(request.getUuid());
-        player.setPosX(request.getX());
-        player.setPosY(request.getY());
+
+        Tile currentTile = getMap()[player.getPosY()][player.getPosX()];
+        if (currentTile instanceof BasicTile) {
+            BasicTile basicTile = (BasicTile) currentTile;
+            basicTile.setOccupied(false);
+        } else {
+            Room room = (Room) currentTile;
+            room.removePlayer(player);
+        }
+
+        Tile nextTile = getMap()[request.getY()][request.getX()];
+        if (nextTile instanceof BasicTile) {
+            BasicTile basicTile = (BasicTile) nextTile;
+            if (basicTile.isOccupied()) return false;
+            else {
+                player.setPosX(request.getX());
+                player.setPosY(request.getY());
+                basicTile.setOccupied(true);
+            }
+        } else {
+            Room room = (Room) nextTile;
+            room.addPlayer(player);
+            player.setPosX(request.getX());
+            player.setPosY(request.getY());
+        }
+        return true;
     }
 
     public boolean checkGuess(CheckGuessRequest request) {

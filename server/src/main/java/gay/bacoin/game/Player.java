@@ -3,12 +3,11 @@ package gay.bacoin.game;
 import java.util.UUID;
 
 public class Player {
-    private int posX;
-
-    private int posY;
     private final String name;
     private final String hexColor;
     private final String uuid;
+    private int posX;
+    private int posY;
 
     public Player(int posX, int posy, String name, String hexColor) {
         this.posX = posX;
