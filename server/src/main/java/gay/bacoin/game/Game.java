@@ -10,8 +10,8 @@ import java.util.UUID;
 public class Game {
     private static HashMap<UUID, Game> allGameRunning = new HashMap<>();
 
-    private Tile[][] map = new Tile[24][24];
-
+    private final Tile[][] map = new Tile[24][24];
+    private final Player[] playerList = new Player[6];
 
     private void fillDefaultMap() {
         //Line 1
@@ -159,16 +159,27 @@ public class Game {
         map[22][17] = new BasicTile(17,21);
     }
 
-
-    public Game() {
-        fillDefaultMap();
+    private void generateDefaultPlayers(){
+        playerList[0] = new Player(0,7,"Bacoin3301","fc5e5e");
+        playerList[1] = new Player(0,15,"Un Chien", "e5e17b");
+        playerList[2] = new Player(7,22,"Olivier Ridoux", "e668f1");
+        playerList[3] = new Player(16,22,"The Doctor","7b86e5");
+        playerList[4] = new Player(23,7, "La Palme", "86fa83");
+        playerList[5] = new Player(23,15,"OCaml", "7be5df");
     }
 
 
-    public static void generateNewGame(){
+    public Game() {
+        fillDefaultMap();
+        generateDefaultPlayers();
+    }
+
+
+    public static UUID generateNewGame(){
         Game g = new Game();
         UUID uuid = UUID.randomUUID();
         addGame(uuid,g);
+        return uuid;
     }
 
     public static void addGame(UUID uuid, Game game) {

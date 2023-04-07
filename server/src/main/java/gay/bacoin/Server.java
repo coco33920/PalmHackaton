@@ -1,5 +1,9 @@
 package gay.bacoin;
 
+import gay.bacoin.game.Game;
+
+import java.util.UUID;
+
 import static spark.Spark.*;
 
 public class Server {
@@ -13,6 +17,11 @@ public class Server {
         get("/", (request, response) -> {
             response.type("application/json");
             return "{\"text\":\"Hello World\"}";
+        });
+        get("/request_new_game", (request, response) -> {
+            UUID uuid = Game.generateNewGame();
+            response.type("application/json");
+            return "{\"uuid\":\""+uuid+"\"}";
         });
     }
 }
