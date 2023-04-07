@@ -3,6 +3,7 @@ package gay.bacoin.game;
 import gay.bacoin.game.tiles.BasicTile;
 import gay.bacoin.game.tiles.Room;
 import gay.bacoin.game.tiles.Tile;
+import gay.bacoin.json.CheckGuessRequest;
 import gay.bacoin.json.MovePlayerRequest;
 
 import java.util.HashMap;
@@ -13,6 +14,27 @@ public class Game {
 
     private final Tile[][] map = new Tile[24][24];
     private final HashMap<String, Player> players = new HashMap<>();
+
+    public Game() {
+        fillDefaultMap();
+        generateDefaultPlayers();
+    }
+
+    public static UUID generateNewGame() {
+        Game g = new Game();
+        UUID uuid = UUID.randomUUID();
+        addGame(uuid, g);
+        return uuid;
+    }
+
+    public static void addGame(UUID uuid, Game game) {
+        allGameRunning.put(uuid, game);
+    }
+
+    public static Game getGame(UUID uuid) {
+        Game g = allGameRunning.get(uuid);
+        return g;
+    }
 
     private void fillDefaultMap() {
         //Line 1
@@ -181,11 +203,9 @@ public class Game {
         player.setPosY(request.getY());
     }
 
-    public Game() {
-        fillDefaultMap();
-        generateDefaultPlayers();
+    public boolean checkGuess(CheckGuessRequest request) {
+        return false;
     }
-
 
     public Player[] getPlayerList() {
         return players.values().toArray(Player[]::new);
@@ -193,21 +213,5 @@ public class Game {
 
     public Tile[][] getMap() {
         return map;
-    }
-
-    public static UUID generateNewGame() {
-        Game g = new Game();
-        UUID uuid = UUID.randomUUID();
-        addGame(uuid, g);
-        return uuid;
-    }
-
-    public static void addGame(UUID uuid, Game game) {
-        allGameRunning.put(uuid, game);
-    }
-
-    public static Game getGame(UUID uuid) {
-        Game g = allGameRunning.get(uuid);
-        return g;
     }
 }

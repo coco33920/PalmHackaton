@@ -6,9 +6,9 @@ public class Player {
     private int posX;
 
     private int posY;
-    private String name;
-    private String hexColor;
-    private String uuid;
+    private final String name;
+    private final String hexColor;
+    private final String uuid;
 
     public Player(int posX, int posy, String name, String hexColor) {
         this.posX = posX;
