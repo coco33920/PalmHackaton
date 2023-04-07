@@ -3,7 +3,6 @@ package gay.bacoin.game.tiles;
 import gay.bacoin.game.Player;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Room extends Tile {
 
