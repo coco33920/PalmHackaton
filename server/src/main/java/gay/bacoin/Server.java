@@ -9,7 +9,7 @@ public class Server {
         setupRoute();
     }
 
-    private static void setupRoute() {
+    private static void setupRoute(){
         get("/", (request, response) -> {
             response.type("application/json");
             return "{\"text\":\"Hello World\"}";
