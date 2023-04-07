@@ -13,7 +13,7 @@ public class Game {
     private static final HashMap<UUID, Game> allGameRunning = new HashMap<>();
 
     private final Tile[][] map = new Tile[24][24];
-    private final HashMap<String, Player> players = new HashMap<>();
+    private final HashMap<Integer, Player> players = new HashMap<>();
 
     public Game() {
         fillDefaultMap();
@@ -183,17 +183,17 @@ public class Game {
 
     private void generateDefaultPlayers() {
         Player player0 = new Player(0, 7, "Bacoin3301", "fc5e5e");
-        players.put(player0.getUuid(), player0);
+        players.put(0, player0);
         Player player1 = new Player(0, 15, "Un Chien", "e5e17b");
-        players.put(player1.getUuid(), player1);
+        players.put(1, player1);
         Player player2 = new Player(7, 22, "Olivier Ridoux", "e668f1");
-        players.put(player2.getUuid(), player2);
+        players.put(2, player2);
         Player player3 = new Player(16, 22, "The Doctor", "7b86e5");
-        players.put(player3.getUuid(), player3);
+        players.put(3, player3);
         Player player4 = new Player(23, 7, "La Palme", "86fa83");
-        players.put(player4.getUuid(), player4);
+        players.put(4, player4);
         Player player5 = new Player(23, 15, "OCaml", "7be5df");
-        players.put(player5.getUuid(), player5);
+        players.put(5, player5);
     }
 
     public boolean movePlayer(MovePlayerRequest request) {

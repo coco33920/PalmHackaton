@@ -1,11 +1,8 @@
 package gay.bacoin.game;
 
-import java.util.UUID;
-
 public class Player {
     private final String name;
     private final String hexColor;
-    private final String uuid;
     private int posX;
     private int posY;
 
@@ -14,7 +11,6 @@ public class Player {
         this.posY = posy;
         this.name = name;
         this.hexColor = hexColor;
-        this.uuid = UUID.randomUUID().toString();
     }
 
     public int getPosX() {
@@ -39,9 +35,5 @@ public class Player {
 
     public String getHexColor() {
         return hexColor;
-    }
-
-    public String getUuid() {
-        return uuid;
     }
 }
