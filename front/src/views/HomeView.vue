@@ -81,6 +81,42 @@ function update_active_cells() {
 }
 </script>
 
+<script>
+import axios from "axios";
+
+export default {
+	data() {
+		return {
+			uuid: 0,
+			players: undefined
+		};
+	},
+	methods: {
+		request_game_state() {
+			axios.get(
+				`http://localhost:8080/game_state/${this.uuid}`
+			).then(
+				(res) => {
+					this.players = res.data;
+					console.log(res.data);
+				}
+			)
+		}
+	},
+
+	beforeCreate() {
+		axios.get(
+			"http://localhost:8080/request_new_game"
+		).then(
+			(res) => {
+				this.uuid = res.data.uuid;
+				this.request_game_state();
+			}
+		);
+	}
+}
+</script>
+
 <template>
 	<main>
 		<div class="board">
