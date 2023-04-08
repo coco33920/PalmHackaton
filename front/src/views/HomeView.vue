@@ -185,7 +185,7 @@ export default {
 					@mouseover="handle_mouse_over(i - 1);"
 				/>
 			</div>
-			<img class="board-bg" src="@/assets/board.webp"  alt="board"/>
+			<img class="board-bg" src="@/assets/board.png"  alt="board"/>
 		</div>
 		<div class="ui">
 			<p class="ui-text ui-player_name">Tour de {{ this.get_turn_player().name }}</p>
