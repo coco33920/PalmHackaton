@@ -8,18 +8,46 @@ export default {
 
 <template>
   <main>
-    <div class="board-wrapper">
-      <div class="board">
-        <div class="board-line" v-for="i in 24 * 24" :key="i" :index = "i" />
+    <div class="board">
+      <div class="board-inner">
+        <div class="board-cell" v-for="i in 24 * 24" :key="i" :index = "i" />
       </div>
-      <img id="board-bg" src="@/assets/board.webp" />
+      <img class="board-bg" src="@/assets/board.webp"  alt="board"/>
     </div>
   </main>
 </template>
 
-<style scoped>
-#board-bg {
-  height: 99vh;
-  aspect-ratio: 1/1;
+<style lang="scss" scoped>
+
+.board {
+	height : 100vmin;
+	aspect-ratio: 1/1;
+
+	&-inner {
+		box-sizing: border-box;
+		padding: 5.172vmin;
+		display: grid;
+		grid-template-columns: repeat(24, 1fr);
+
+		aspect-ratio: inherit;
+		height: inherit;
+		position: relative;
+		isolation: isolate;
+	}
+
+  &-cell {
+	  background-color: transparent;
+
+	  &:hover {
+			background-color: rgba(240, 60, 80, .5);
+		}
+  }
+
+  &-bg {
+	  z-index: -1;
+		position: absolute;
+	  height: inherit;
+	  inset: 0;
+  }
 }
 </style>
