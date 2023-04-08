@@ -5,10 +5,12 @@ Découvrez l'ensemble des cartes et explorez la carte dans un jeu de CluedOwO.
 
 ## Run
 ```bash
+git clone https://github.com/coco33920/PalmHackaton
+cd PalmHackaton
 make run
 ```
 
-Et ouvrir le serveur vue.js
+Et ouvrir le serveur vue.js (port 5173 ou 5174)
 
 ## Warning
 
