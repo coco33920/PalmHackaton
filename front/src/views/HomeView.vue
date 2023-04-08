@@ -188,7 +188,9 @@ export default {
 			<img class="board-bg" src="@/assets/board.png"  alt="board"/>
 		</div>
 		<div class="ui">
-			<p class="ui-text ui-player_name">Tour de {{ this.get_turn_player().name }}</p>
+			<p class="ui-text ui-player_name">
+				Tour {{ this.turn }}: {{ this.get_turn_player().name }}
+			</p>
 			<div class="ui-buttons">
 				<button id="ui-btn" @click="next_player()">Next Turn</button>
 				<button id="ui-btn" @click="roll_dice()">🎲</button>
