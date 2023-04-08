@@ -88,29 +88,45 @@ export default {
 	data() {
 		return {
 			uuid: 0,
-			players: undefined
+			players: undefined,
+			board_size: 24,
 		};
 	},
 	methods: {
-		request_game_state() {
+		setup_game_state() {
 			axios.get(
 				`http://localhost:8080/game_state/${this.uuid}`
 			).then(
 				(res) => {
 					this.players = res.data;
 					console.log(res.data);
+					this.setup_players(res.data);
 				}
 			)
+		},
+		setup_players(players) {
+			players.forEach((player) => {
+				const cells = document.querySelectorAll(".board-cell");
+				let target_cell_id = player.posY * this.board_size + player.posX;
+
+				cells.forEach((cell) => {
+					const cell_id = parseInt(cell.getAttribute("index"));
+
+					if (cell_id === target_cell_id) {
+							cell.classList.add(`player_${player.hexColor}`);
+							cell.classList.add("player");
+						}
+					})
+			})
 		}
 	},
-
 	beforeCreate() {
 		axios.get(
 			"http://localhost:8080/request_new_game"
 		).then(
 			(res) => {
 				this.uuid = res.data.uuid;
-				this.request_game_state();
+				this.setup_game_state();
 			}
 		);
 	}
@@ -119,7 +135,7 @@ export default {
 
 <template>
 	<main>
-		<div class="board">
+		<div id="board" class="board">
 			<div class="board-inner">
 				<div
 					:class="{ active: is_active(i) }"
@@ -162,4 +178,30 @@ export default {
 	  inset: 0;
   }
 }
+
+.player {
+	position: relative;
+
+	&::after {
+		content: '';
+		inset: 0;
+		position: absolute;
+
+		box-sizing: border-box;
+		margin: .8vmin;
+
+		border: .2vmin solid black;
+		border-radius: 50em;
+	}
+
+	&_fc5e5e { background-color: #fc5e5e; }
+	&_e668f1 { background-color: #e668f1; }
+	&_7b86e5 { background-color: #7b86e5; }
+
+	&_86fa83 { background-color: #86fa83; }
+	&_7be5df { background-color: #7be5df; }
+	&_e5e17b { background-color: #e5e17b; }
+}
+
+
 </style>
