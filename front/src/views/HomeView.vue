@@ -90,9 +90,18 @@ export default {
 			uuid: 0,
 			players: undefined,
 			board_size: 24,
+			turn: 0,
 		};
 	},
 	methods: {
+		get_turn_player() {
+			if (this.players !== undefined)
+				return this.players[this.turn % this.players.length];
+			return {
+				name: "Loading",
+				deck: []
+			}
+		},
 		setup_game_state() {
 			axios.get(
 				`http://localhost:8080/game_state/${this.uuid}`
@@ -146,6 +155,15 @@ export default {
 				/>
 			</div>
 			<img class="board-bg" src="@/assets/board.webp"  alt="board"/>
+		</div>
+		<div class="ui">
+			<p class="ui-player_name">Tour de {{ this.get_turn_player().name }}</p>
+
+			<div class="ui-cards">
+				<div class="card" v-for="card in get_turn_player().deck">
+					{{ card }}
+				</div>
+			</div>
 		</div>
 	</main>
 </template>
@@ -203,5 +221,30 @@ export default {
 	&_e5e17b { background-color: #e5e17b; }
 }
 
+main {
+	display: flex;
+}
 
+.ui {
+	padding: 1vmin;
+
+	&-player_name {
+		margin: 0;
+		font-weight: bold;
+		font-size: 3vmin;
+	}
+}
+
+@media (orientation: landscape)
+{
+	main {
+		flex-direction: row;
+	}
+}
+
+@media (orientation: portrait) {
+	main {
+		flex-direction: column;
+	}
+}
 </style>
