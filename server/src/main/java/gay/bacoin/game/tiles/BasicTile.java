@@ -10,4 +10,13 @@ public class BasicTile extends Tile {
     public boolean isOccupied() {
         return occupied;
     }
+
+    public void setOccupied(boolean occupied) {
+        this.occupied = occupied;
+    }
+
+    @Override
+    public String toString() {
+        return "BasicTile [x=" + getX() + ";y=" + getY() + "]";
+    }
 }
