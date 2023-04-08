@@ -6,9 +6,7 @@ import gay.bacoin.game.tiles.Tile;
 import gay.bacoin.json.CheckGuessRequest;
 import gay.bacoin.json.MovePlayerRequest;
 
-import java.util.HashMap;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 public class Game {
     private static final HashMap<UUID, Game> allGameRunning = new HashMap<>();
@@ -17,17 +15,21 @@ public class Game {
     private final HashMap<Integer, Player> players = new HashMap<>();
     private final int[] solution = new int[3];
 
-
-    public Game() {
-        fillDefaultMap();
-        generateDefaultPlayers();
+    private void generateSolution() {
         Random r = new Random();
-        int weapon = r.nextInt(8);
-        int places = r.nextInt(8);
+        int weapon = r.nextInt(8) + 10;
+        int places = r.nextInt(8) + 20;
         int player = r.nextInt(6);
         solution[0] = weapon;
         solution[1] = places;
         solution[2] = player;
+    }
+
+    public Game() {
+        fillDefaultMap();
+        generateDefaultPlayers();
+        generateSolution();
+        distributeDeckOfCardBetweenPlayers();
     }
 
     public static UUID generateNewGame() {
@@ -252,9 +254,39 @@ public class Game {
         return map;
     }
 
-    public int[] cardDistribution(){
-        Weapons[] weapons = Weapons.values();
+    //21-3 = 18/6 = 3 cartes par joueurs
 
-        Weapons.
+    public void distributeDeckOfCardBetweenPlayers() {
+        Integer[] weaponIds = Arrays.stream(Weapons.values()).map(Weapons::getId).filter(id -> id != solution[0]).toArray(Integer[]::new);
+        Integer[] placesIds = Arrays.stream(Places.values()).map(Places::getId).filter(id -> id != solution[1]).toArray(Integer[]::new);
+        Integer[] playerIds = players.keySet().stream().filter(id -> id != solution[2]).toArray(Integer[]::new);
+
+        ArrayList<Integer> allCardsButAnswer = new ArrayList<>();
+        allCardsButAnswer.addAll(Arrays.asList(weaponIds));
+        allCardsButAnswer.addAll(Arrays.asList(playerIds));
+        allCardsButAnswer.addAll(Arrays.asList(placesIds));
+        Random r = new Random();
+        for (Player player : players.values()) {
+
+
+
+            int firstCardIndex = r.nextInt(allCardsButAnswer.size());
+            int firstCard = allCardsButAnswer.get(firstCardIndex);
+            allCardsButAnswer.remove((Integer) firstCard);
+
+            int secondCardIndex = r.nextInt(allCardsButAnswer.size());
+            int secondCard = allCardsButAnswer.get(secondCardIndex);
+            allCardsButAnswer.remove((Integer) secondCard);
+
+            int thirdCardIndex = r.nextInt(allCardsButAnswer.size());&
+            int thirdCard = allCardsButAnswer.get(thirdCardIndex);
+            allCardsButAnswer.remove((Integer) thirdCard);
+
+            int[] deck = {firstCard, secondCard, thirdCard};
+            player.setDeck(deck);
+
+        }
+
+
     }
 }
