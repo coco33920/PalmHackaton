@@ -208,6 +208,10 @@ public class Game {
             room.removePlayer(player);
         }
 
+        if (request.getX() >= 24 || request.getY() >= 24 || request.getX() < 0 || request.getY() < 0) {
+            return false;
+        }
+
         Tile nextTile = getMap()[request.getY()][request.getX()];
         if (nextTile instanceof BasicTile) {
             BasicTile basicTile = (BasicTile) nextTile;
