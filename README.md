@@ -39,7 +39,7 @@ Le jeu n'est pas complètement terminé, en effet on n'a pas implémenter les d�
 ![Soif](front/src/assets/place_soif_20.png)
 ![TempleOS](front/src/assets/place_temple_os_25.png)
 
-## Suspects
+## Suspects
 
 ![Bacoin](front/src/assets/suspect_bacoin_0.png)
 ![TheDoctor](front/src/assets/suspect_doctor_3.png)
