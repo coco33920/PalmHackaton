@@ -7,6 +7,7 @@ import gay.bacoin.json.CheckGuessRequest;
 import gay.bacoin.json.MovePlayerRequest;
 
 import java.util.HashMap;
+import java.util.Random;
 import java.util.UUID;
 
 public class Game {
@@ -14,10 +15,19 @@ public class Game {
 
     private final Tile[][] map = new Tile[24][24];
     private final HashMap<Integer, Player> players = new HashMap<>();
+    private final int[] solution = new int[3];
+
 
     public Game() {
         fillDefaultMap();
         generateDefaultPlayers();
+        Random r = new Random();
+        int weapon = r.nextInt(8);
+        int places = r.nextInt(8);
+        int player = r.nextInt(6);
+        solution[0] = weapon;
+        solution[1] = places;
+        solution[2] = player;
     }
 
     public static UUID generateNewGame() {
@@ -231,7 +241,7 @@ public class Game {
     }
 
     public boolean checkGuess(CheckGuessRequest request) {
-        return false;
+        return (solution[0] == request.getWeapon()) && (solution[1] == request.getPlace()) && (solution[2] == request.getKiller());
     }
 
     public Player[] getPlayerList() {
