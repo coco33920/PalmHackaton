@@ -1,15 +1,14 @@
 package gay.bacoin.game;
 
 public enum Weapons {
-    BEC(0, "bec benzène"),
-    BROYEUR(1, "Broyeur"),
-    CHALUMEAU(2, "Chalumeau"),
-    RM(3, "rm -rf memoire.pdf"),
-    GRIBOUILLAGE(4, "Gribouillage dessus"),
-    CAFE(5, "Café"),
-    WINDOWS(6, "Windows failure"),
-    MARTEAU(7, "Marteau");
-    ;
+    BEC(10, "bec benzène"),
+    BROYEUR(11, "Broyeur"),
+    RM(12, "rm -rf memoire.pdf"),
+    GRIBOUILLAGE(13, "Gribouillage dessus"),
+    CAFE(14, "Café"),
+    WINDOWS(15, "Windows failure"),
+    MARTEAU(16, "Marteau");
+
 
     private final String text;
     private final int id;

@@ -5,6 +5,7 @@ public class Player {
     private final String hexColor;
     private int posX;
     private int posY;
+    private int[] deck;
 
     public Player(int posX, int posy, String name, String hexColor) {
         this.posX = posX;
@@ -35,5 +36,9 @@ public class Player {
 
     public String getHexColor() {
         return hexColor;
+    }
+
+    public void setDeck(int[] deck) {
+        this.deck = deck;
     }
 }

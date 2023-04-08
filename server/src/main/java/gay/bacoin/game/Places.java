@@ -1,14 +1,14 @@
 package gay.bacoin.game;
 
 public enum Places {
-    SOIF(0, "Rue de la Soif"),
-    AMPHIP(1, "Amphi P"),
-    TROUNOIR(2, "Trou noir"),
-    FOY(3, "Foyyer de la palme"),
-    I59(4, "Salle I59"),
-    TEMPLEOS(5, "Temple OS"),
-    E303(6, "Salle E303"),
-    GREVESLAND(7, "Rennes2");
+    SOIF(20, "Rue de la Soif"),
+    AMPHIP(21, "Amphi P"),
+    TROUNOIR(22, "Trou noir"),
+    FOY(23, "Foyyer de la palme"),
+    I59(24, "Salle I59"),
+    TEMPLEOS(25, "Temple OS"),
+    E303(26, "Salle E303"),
+    GREVESLAND(27, "Rennes2");
     ;
 
     private final String text;

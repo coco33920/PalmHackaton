@@ -5,6 +5,9 @@ import gay.bacoin.game.Game;
 import gay.bacoin.json.CheckGuessRequest;
 import gay.bacoin.json.MovePlayerRequest;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.util.UUID;
 
 import static spark.Spark.*;
@@ -84,6 +87,19 @@ public class Server {
             CheckGuessRequest checkGuessRequest = new Gson().fromJson(body, CheckGuessRequest.class);
             boolean success = g.checkGuess(checkGuessRequest);
             return "{\"success\":" + success + "}";
+        });
+
+        get("/olivierridoudoux", (request, response) -> {
+            response.type("image/png");
+            BufferedImage ridoudoux = ImageIO.read(Server.class.getClassLoader().getResource("ridoudou.png"));
+            byte[] rawImage = null;
+            try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+                ImageIO.write(ridoudoux, "png", baos);
+                baos.flush();
+                rawImage = baos.toByteArray();
+            }
+
+            return rawImage;
         });
     }
 }
