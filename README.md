@@ -9,3 +9,7 @@ make run
 ```
 
 Et ouvrir le serveur vue.js
+
+## Warning
+
+Le jeu n'est pas complètement terminé, en effet on n'a pas implémenter les déplacement et le guess du milieu au bureau de la Palme pour terminer la partie, on a pas eu le temps et on était crevé
