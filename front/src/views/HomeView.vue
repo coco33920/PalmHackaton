@@ -91,6 +91,7 @@ export default {
 			players: undefined,
 			board_size: 24,
 			turn: 0,
+			roll: undefined,
 			assets: {
 				0: "suspect_bacoin_0.png",
 				1: "suspect_dog_1.png",
@@ -122,7 +123,8 @@ export default {
 				return this.players[this.turn % this.players.length];
 			return {
 				name: "Loading",
-				deck: []
+				deck: [],
+				roll: undefined
 			}
 		},
 		setup_game_state() {
@@ -153,6 +155,9 @@ export default {
 		},
 		next_player() {
 			this.turn++;
+		},
+		roll_dice() {
+			this.roll = Math.floor(Math.random() * 6) + 1;
 		}
 	},
 	beforeCreate() {
@@ -183,8 +188,12 @@ export default {
 			<img class="board-bg" src="@/assets/board.webp"  alt="board"/>
 		</div>
 		<div class="ui">
-			<p class="ui-player_name">Tour de {{ this.get_turn_player().name }}</p>
-			<button id="ui-btn" @click="next_player()">Next Turn</button>
+			<p class="ui-text ui-player_name">Tour de {{ this.get_turn_player().name }}</p>
+			<div class="ui-buttons">
+				<button id="ui-btn" @click="next_player()">Next Turn</button>
+				<button id="ui-btn" @click="roll_dice()">🎲</button>
+				<p class="ui-text" v-if="this.roll !== undefined">{{ this.roll }}</p>
+			</div>
 
 			<div class="ui-cards">
 				<div class="card" v-for="card in get_turn_player().deck">
@@ -260,8 +269,12 @@ export default {
 		transform: translateY(0);
 	}
 
+	99% {
+		transform: translateY(120%) scale(1);
+	}
+
 	100% {
-		transform: translateY(100%);
+		transform: translateY(120%) scale(0);
 	}
 }
 
@@ -276,7 +289,6 @@ body {
 
 	&::after {
 		content: "Qui a détruit le mémoire d'Hector?";
-
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -290,10 +302,11 @@ body {
 		background: black;
 
 		position: absolute;
-		inset: 0;
 
-		animation: fadeIn 1s ease-in-out 2s;
-		animation-fill-mode: forwards;
+		inset: -1vmin;
+		overflow: hidden;
+
+		animation: fadeIn 1s ease-in-out 2s forwards;
 		z-index: 999;
 	}
 }
@@ -306,8 +319,13 @@ main {
 }
 
 .ui {
-	min-width: 260px;
+	min-width: 320px;
 	padding: 1vmin;
+
+	&-buttons {
+		display: flex;
+		align-items: center;
+	}
 
 	&-cards {
 		margin: 1vmin;
@@ -315,7 +333,7 @@ main {
 		gap: 1em;
 	}
 
-	&-player_name {
+	&-text {
 		margin: 0;
 		padding: 1vmin;
 		font-family: sans-serif;
