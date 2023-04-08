@@ -7,8 +7,7 @@ public enum Weapons {
     GRIBOUILLAGE(13, "Gribouillage dessus"),
     CAFE(14, "Café"),
     WINDOWS(15, "Windows failure"),
-    MARTEAU(16, "Marteau"),
-    KATANA(17,"Katana");
+    MARTEAU(16, "Marteau");
 
 
     private final String text;

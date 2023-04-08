@@ -259,7 +259,6 @@ public class Game {
     public void distributeDeckOfCardBetweenPlayers() {
         Integer[] weaponIds = Arrays.stream(Weapons.values()).map(Weapons::getId).filter(id -> id != solution[0]).toArray(Integer[]::new);
         Integer[] placesIds = Arrays.stream(Places.values()).map(Places::getId).filter(id -> id != solution[1]).toArray(Integer[]::new);
-        placesIds = Arrays.stream(placesIds).filter(id -> id != 23).toArray(Integer[]::new);
         Integer[] playerIds = players.keySet().stream().filter(id -> id != solution[2]).toArray(Integer[]::new);
 
         ArrayList<Integer> allCardsButAnswer = new ArrayList<>();
