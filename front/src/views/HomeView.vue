@@ -91,6 +91,29 @@ export default {
 			players: undefined,
 			board_size: 24,
 			turn: 0,
+			assets: {
+				0: "suspect_bacoin_0.png",
+				1: "suspect_dog_1.png",
+				2: "suspect_ridoux_2.png",
+				3: "suspect_doctor_3.png",
+				4: "suspect_palme_4.png",
+				5: "suspect_ocaml_5.png",
+				10: "arme_bec_bunsen_10.png",
+				11: "arme_broyeur_11.png",
+				12: "arme_rm_12.png",
+				13: "arme_gribouillage_13.png",
+				14: "arme_coffee_14.png",
+				15: "arme_win_update_15.png",
+				16: "arme_hammer_16.png",
+				17: "arme_katana_17.png",
+				20: "place_soif_20.png",
+				21: "place_amphi_21.png",
+				22: "place_black_hole_22.png",
+				24: "place_i59_24.png",
+				25: "place_temple_os_25.png",
+				26: "place_e303_26.png",
+				27: "place_rennes_2_27.png",
+			}
 		};
 	},
 	methods: {
@@ -127,6 +150,9 @@ export default {
 						}
 					})
 			})
+		},
+		next_player() {
+			this.turn++;
 		}
 	},
 	beforeCreate() {
@@ -158,32 +184,36 @@ export default {
 		</div>
 		<div class="ui">
 			<p class="ui-player_name">Tour de {{ this.get_turn_player().name }}</p>
+			<button id="ui-btn" @click="next_player()">Next Turn</button>
 
 			<div class="ui-cards">
 				<div class="card" v-for="card in get_turn_player().deck">
-					{{ card }}
+					<img :src="'src/assets/' + this.assets[card]" alt="">
 				</div>
 			</div>
 		</div>
 	</main>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .active {
 	background-color: rgba(240, 60, 80, .5);
 }
 
 .board {
-	height : 100vmin;
+	position: relative;
+	height : 75vmin;
 	aspect-ratio: 1/1;
 
 	&-inner {
 		box-sizing: border-box;
-		padding: 5.172vmin;
+		padding: calc(5.172vmin * .75);
 		display: grid;
 		grid-template-columns: repeat(24, 1fr);
 
 		aspect-ratio: inherit;
+		font-weight: bold;
+		font-size: 2vmin;
 		height: inherit;
 		position: relative;
 		isolation: isolate;
@@ -208,6 +238,10 @@ export default {
 		box-sizing: border-box;
 		margin: .8vmin;
 
+		display: grid;
+		place-content: center;
+
+		color: white;
 		border: .2vmin solid black;
 		border-radius: 50em;
 	}
@@ -221,18 +255,85 @@ export default {
 	&_e5e17b { background-color: #e5e17b; }
 }
 
+@keyframes fadeIn {
+	0% {
+		transform: translateY(0);
+	}
+
+	100% {
+		transform: translateY(100%);
+	}
+}
+
+#app {
+	color: white;
+	margin: 1em;
+}
+
+body {
+	position: relative;
+	background-image: url("src/assets/bg.png");
+
+	&::after {
+		content: "Qui a détruit le mémoire d'Hector?";
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		font-size: 3vmin;
+		font-weight: bold;
+		font-family: sans-serif;
+
+		color: white;
+		background: black;
+
+		position: absolute;
+		inset: 0;
+
+		animation: fadeIn 1s ease-in-out 2s;
+		animation-fill-mode: forwards;
+		z-index: 999;
+	}
+}
+
 main {
 	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
 }
 
 .ui {
+	min-width: 260px;
 	padding: 1vmin;
+
+	&-cards {
+		margin: 1vmin;
+		display: flex;
+		gap: 1em;
+	}
 
 	&-player_name {
 		margin: 0;
+		padding: 1vmin;
+		font-family: sans-serif;
 		font-weight: bold;
-		font-size: 3vmin;
+		font-size: 2vmin;
 	}
+}
+
+#ui-btn {
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 2vmin;
+	padding: 1vmin;
+
+	background: #E5B47B;
+	border: 2px solid #CC845C;
+	border-radius: 1vmin;
+	margin: 1vmin;
 }
 
 @media (orientation: landscape)
@@ -240,11 +341,22 @@ main {
 	main {
 		flex-direction: row;
 	}
+	.ui-cards {
+		flex-direction: column;
+	}
 }
 
 @media (orientation: portrait) {
 	main {
 		flex-direction: column;
 	}
+
+	.ui-cards {
+		flex-direction: row;
+	}
+}
+
+.card > img {
+	height: 20vmin;
 }
 </style>
