@@ -251,4 +251,10 @@ public class Game {
     public Tile[][] getMap() {
         return map;
     }
+
+    public int[] cardDistribution(){
+        Weapons[] weapons = Weapons.values();
+
+        Weapons.
+    }
 }
