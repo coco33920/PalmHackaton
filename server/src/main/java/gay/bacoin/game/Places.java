@@ -4,7 +4,7 @@ public enum Places {
     SOIF(20, "Rue de la Soif"),
     AMPHIP(21, "Amphi P"),
     TROUNOIR(22, "Trou noir"),
-    FOY(23, "Foyyer de la palme"),
+    FOY(23, "Foyer de la palme"),
     I59(24, "Salle I59"),
     TEMPLEOS(25, "Temple OS"),
     E303(26, "Salle E303"),

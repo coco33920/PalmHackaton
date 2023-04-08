@@ -41,4 +41,8 @@ public class Player {
     public void setDeck(int[] deck) {
         this.deck = deck;
     }
+
+    public int[] getDeck() {
+        return deck;
+    }
 }
