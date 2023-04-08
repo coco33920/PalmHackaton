@@ -278,7 +278,7 @@ public class Game {
             int secondCard = allCardsButAnswer.get(secondCardIndex);
             allCardsButAnswer.remove((Integer) secondCard);
 
-            int thirdCardIndex = r.nextInt(allCardsButAnswer.size());&
+            int thirdCardIndex = r.nextInt(allCardsButAnswer.size());
             int thirdCard = allCardsButAnswer.get(thirdCardIndex);
             allCardsButAnswer.remove((Integer) thirdCard);
 
